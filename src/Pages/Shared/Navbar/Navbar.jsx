@@ -1,7 +1,7 @@
 
 const Navbar = () => {
     const navOptions = <>
-        <li><a>Item 1</a></li>
+        <li><a>Home</a></li>
         <li tabIndex={0}>
             <details>
                 <summary>Parent</summary>
@@ -11,7 +11,7 @@ const Navbar = () => {
                 </ul>
             </details>
         </li>
-        <li><a>Item 3</a></li>
+        <li><a>Colleges</a></li>
     </>
     return (
         <div>

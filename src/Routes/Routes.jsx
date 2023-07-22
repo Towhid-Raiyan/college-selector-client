@@ -2,6 +2,7 @@ import {
     createBrowserRouter,
   } from "react-router-dom";
 import Main from "../Layout/Main";
+import Colleges from "../Pages/Colleges/Colleges";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 
@@ -14,6 +15,10 @@ import Home from "../Pages/Home/Home/Home";
         {
             path: '/',
             element: <Home></Home>
+        },
+        {
+          path: '/colleges',
+          element: <Colleges></Colleges>
         }
       ]
     },

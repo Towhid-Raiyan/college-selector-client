@@ -1,10 +1,13 @@
 import GraduationGallery from "../GraduationGallery/GraduationGallery";
+import PopularColleges from "../PopularColleges/PopularColleges";
+import ResearchWorks from "../ResearchWorks/ResearchWorks";
 
 const Home = () => {
     return (
         <div>
-            <h2>This is home</h2>
+            <PopularColleges></PopularColleges>
             <GraduationGallery></GraduationGallery>
+            <ResearchWorks></ResearchWorks>
         </div>
     );
 };
