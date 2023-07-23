@@ -3,6 +3,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import Typewriter from "typewriter-effect";
+import { Link } from "react-router-dom";
+import { Rating } from "@smastrom/react-rating";
+import '@smastrom/react-rating/style.css'
 
 const Colleges = () => {
     const [college, setCollege] = useState([]);
@@ -46,19 +49,25 @@ const Colleges = () => {
                             <div className="card-body items-start">
                                 <h2 className="card-title text-center mx-auto">{item?.college_name}</h2>
                                 <p className="text-sm text-gray-600">
-                                    Admission Date: {item?.admission_date}
+                                    <strong>Admission Date:</strong> {item?.admission_date}
                                 </p>
                                 <p className="text-sm text-gray-600">
-                                    Research History: {item?.research_history}
+                                    <strong>Research History:</strong> {item?.research_history}
                                 </p>
                                 <p className="text-sm text-gray-600">
-                                    Number of Researches: {item?.number_of_research}
+                                    <strong>Number of Researches:</strong> {item?.number_of_research}
                                 </p>
-                                <p className="text-sm text-gray-600">
-                                    Ratings: {item?.college_ratings}
+                                <p className="text-sm text-gray-600 flex">
+                                    <strong>Ratings:</strong> <Rating
+                                        style={{ maxWidth: 100 }}
+                                        value={item?.college_ratings}
+                                        readOnly
+                                    />
                                 </p>
                                 <div className="card-actions">
-                                    <button className="btn btn-outline bg-slate-100 border-0 border-b-4 border-orange-400 mt-4">Details</button>
+                                    <Link to={`/allCollege/${item._id}`}>
+                                        <button className="btn btn-outline px-10 bg-slate-100 border-0 border-b-4 border-orange-400 mt-4">Details</button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

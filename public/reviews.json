@@ -1,0 +1,32 @@
+[
+    {
+        "_id": "643010e0f5a7e52ce1e8fa65",
+        "name": "Jane Doe",
+        "details": "A renowned institution with a rich history of academic excellence. Oxford's picturesque campus and esteemed faculty provide a stimulating learning environment. The diverse student community fosters a global perspective, making it an ideal place for intellectual growth.",
+        "rating": 3
+    },
+    {
+        "_id": "643010f9f5a7e52ce1e8fa66",
+        "name": "John Doe",
+        "details": "A world-class university known for its cutting-edge research and innovation. Cambridge's historic architecture and vibrant culture create a unique learning experience. Students benefit from interdisciplinary programs and abundant opportunities for personal and academic development.",
+        "rating": 2
+    },
+    {
+        "_id": "6430110af5a7e52ce1e8fa67",
+        "name": "MJ Doe",
+        "details": "A trailblazer in technology and engineering education. MIT's rigorous curriculum challenges students to push boundaries and solve real-world problems. The institute's strong industry connections offer unparalleled exposure to groundbreaking research and advancements.",
+        "rating": 5
+    },
+    {
+        "_id": "64301123f5a7e52ce1e8fa68",
+        "name": "Sarah Smith",
+        "details": "A prestigious institution that balances academic excellence with a nurturing campus environment. Stanford's dedication to entrepreneurship and interdisciplinary collaboration fosters innovation. Students thrive in an intellectually stimulating community known for its cutting-edge research.",
+        "rating": 4
+    },
+    {
+        "_id": "6430113af5a7e52ce1e8fa69",
+        "name": "Robert Johnson",
+        "details": "A leading Canadian university offering a diverse range of programs and opportunities. The University of Toronto's global reputation attracts top-notch faculty and students from around the world. Its urban campus and vibrant city setting provide an enriching academic experience.",
+        "rating": 5
+    }
+]

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Fade } from "react-awesome-reveal";
+import { Link } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 
 const PopularColleges = () => {
@@ -46,20 +47,22 @@ const PopularColleges = () => {
                             <div className="card-body items-start">
                                 <h2 className="card-title text-center mx-auto">{item?.college_name}</h2>
                                 <p className="text-sm text-gray-600">
-                                    Admission Date: {item?.admission_date}
+                                    <strong>Admission Date:</strong> {item?.admission_date}
                                 </p>
                                 <p className="text-sm text-gray-600">
-                                    Research History: {item?.research_history}
+                                    <strong>Research History:</strong> {item?.research_history}
                                 </p>
                                 <p className="text-sm text-gray-600">
                                     {/* Sports: {item?.sports.map((sport) => {sport.sport_name})} */}
-                                    Sports: {item?.sports[0].sport_name}, {item?.sports[1].sport_name}
+                                    <strong>Sports:</strong> {item?.sports[0].sport_name}, {item?.sports[1].sport_name}
                                 </p>
                                 <p className="text-sm text-gray-600">
-                                    Events: {item?.events[0].event_name}, {item?.events[1].event_name}
+                                    <strong>Events:</strong> {item?.events[0].event_name}, {item?.events[1].event_name}
                                 </p>
                                 <div className="card-actions">
-                                    <button className="btn btn-outline bg-slate-100 border-0 border-b-4 border-orange-400 mt-4">Details</button>
+                                    <Link to={`/allCollege/${item._id}`}>
+                                        <button className="btn btn-outline px-10 bg-slate-100 border-0 border-b-4 border-orange-400 mt-4">Details</button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
