@@ -5,19 +5,15 @@ import "react-tooltip/dist/react-tooltip.css";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import useAdmin from "../../../hook/useAdmin";
-// import useInstructor from "../../../hook/useInstructor";
-// import useStudent from "../../../hook/useStudent";
-// import { useEffect } from "react";
+import { FaGraduationCap } from "react-icons/fa";
 const Navbar = () => {
 
     const { name, user, logOut, photo } = useContext(AuthContext);
-    // console.log(name);
+    
     const handleLogout = () => {
         logOut()
             .then(() => {
                 toast.error("Logout Successful", { autoClose: 2000 });
-                // Swal.fire("Logout", "LogOut Successfull", "success");
             })
             .catch((error) => {
                 console.log(error);
@@ -111,7 +107,7 @@ const Navbar = () => {
                         <Link to={"/"}>
                             <div className="w-28 rounded-full ms-6">
                                 {/* <img src={logo} className="w-28 h-10" /> */}
-                                <h2 className="w-28 h-10">College Selector</h2>
+                                <h2 className="w-44 h-10 font-semibold italic text-lg flex items-center"> <span className="text-2xl"><FaGraduationCap></FaGraduationCap></span> <span className="ps-2">College Selector</span></h2>
                             </div>
                         </Link>
                         
@@ -125,12 +121,10 @@ const Navbar = () => {
                     <div className="avatar placeholder rounded-full ring ring-danger ring-offset-base-100 ring-offset-2">
                         <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
                             {user ? (
-                                <img id="yes-element" src={photo} alt={name} />
+                                <Link to={"/profile"}><img id="yes-element" src={photo} alt={name} /></Link>
                             ) : (
                                 <span id="no-element">X</span>
                             )}
-
-                            {/* <span id="no-element">X</span> */}
                         </div>
                     </div>
                     <Tooltip

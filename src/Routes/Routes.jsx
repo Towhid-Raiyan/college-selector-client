@@ -8,7 +8,10 @@ import Colleges from "../Pages/Colleges/Colleges";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
+import MyCollege from "../Pages/MyCollege/MyCollege";
+import Profile from "../Pages/Profile/Profile";
 import Register from "../Pages/Register/Register";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -27,10 +30,10 @@ export const router = createBrowserRouter([
       {
         path: "/allCollege/:id",
         element: (
-          <CollegeDetails></CollegeDetails>
+          <PrivateRoute><CollegeDetails></CollegeDetails></PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/allCollege/${params.id}`, {
+          fetch(`https://server-college-selector-towhid-raiyan.vercel.app/allCollege/${params.id}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -48,6 +51,14 @@ export const router = createBrowserRouter([
       {
         path: '/admission',
         element: <Admission></Admission>
+      },
+      {
+        path: '/myCollege',
+        element: <MyCollege></MyCollege>
+      },
+      {
+        path: '/profile',
+        element:<Profile></Profile>
       }
     ]
   },

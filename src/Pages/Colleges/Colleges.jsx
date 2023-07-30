@@ -5,15 +5,17 @@ import { Fade } from "react-awesome-reveal";
 import Typewriter from "typewriter-effect";
 import { Link } from "react-router-dom";
 import { Rating } from "@smastrom/react-rating";
-import '@smastrom/react-rating/style.css'
+import '@smastrom/react-rating/style.css';
+import setTitle from "../../hook/setTitle"
 
 const Colleges = () => {
+    setTitle("Colleges");
     const [college, setCollege] = useState([]);
-
+    
     useEffect(() => {
         axios
             .get(
-                "http://localhost:5000/allCollege"
+                "https://server-college-selector-towhid-raiyan.vercel.app/allCollege"
             )
             .then((response) => {
                 setCollege(response.data);
@@ -64,10 +66,18 @@ const Colleges = () => {
                                         readOnly
                                     />
                                 </p>
-                                <div className="card-actions">
-                                    <Link to={`/allCollege/${item._id}`}>
-                                        <button className="btn btn-outline px-10 bg-slate-100 border-0 border-b-4 border-orange-400 mt-4">Details</button>
-                                    </Link>
+                                <div className="flex">
+                                    <div className="card-actions">
+                                        <Link to={`/allCollege/${item._id}`}>
+                                            <button className="btn btn-outline px-10 bg-slate-100 border-0 border-b-4 border-orange-400 mt-4">Details</button>
+                                        </Link>
+                                    </div>
+                                    <div className="card-actions ml-28">
+                                        <Link to={'/admission'}>
+                                            <button className="btn btn-outline px-10 bg-slate-100 border-0 border-b-4 border-orange-400 mt-4">Apply Now</button>
+                                        </Link>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

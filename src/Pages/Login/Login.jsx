@@ -1,16 +1,20 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import Lottie from 'react-lottie';
 import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import animationData   from "../../assets/lottie/register.json";
-// import setTitle from '../../hook/setTitle';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import app from '../../firebase/firebase.config';
+import setTitle from '../../hook/setTitle';
 
-
+const auth = getAuth(app);
 const Login = () => {
-    // setTitle('Login');
-    const { googleSignIn, setUser, loginWithEmail } = useContext(AuthContext);
+    setTitle('Login');
+    const { googleSignIn,githubSignIn, setUser, loginWithEmail } = useContext(AuthContext);
     const [status, setStatus] = useState(null);
     const [error, setError] = useState(null);
+
+    const emailRef = useRef();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -30,8 +34,22 @@ const Login = () => {
                 setError(error.message);
             });
     };
+    const handleGithubSignIn = () => {
+        setStatus(null);
+        setError(null);
+        githubSignIn()
+            .then((result) => {
+                setError(null);
+                setStatus("Sign In Successfull");
+                setUser(result.user);
+                navigate(from, { replace: true });
+            })
+            .catch((error) => {
+                setError(error.message);
+            });
+    };
 
-    const hangleEmailLogin = (event) => {
+    const handleEmailLogin = (event) => {
         setStatus(null);
         setError(null);
         event.preventDefault();
@@ -50,6 +68,23 @@ const Login = () => {
             });
         form.reset();
     };
+
+    const handleResetPassword = (event) =>{
+        const email = emailRef.current.value;
+        if(!email){
+            alert('Please provide your email to reset password')
+            return
+        }
+        sendPasswordResetEmail(auth, email)
+        .then(()=>{
+            alert('Please check your Email')
+        })
+        .catch(error =>{
+            console.log(error);
+            setError(error.message)
+        })
+    }
+
     const defaultOptions = {
         loop: true,
         autoplay: true,
@@ -71,7 +106,7 @@ const Login = () => {
                         </div>
                     </div>
                     <Form
-                        onSubmit={hangleEmailLogin}
+                        onSubmit={handleEmailLogin}
                         className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 "
                     >
                         <div className="card-body">
@@ -82,6 +117,7 @@ const Login = () => {
                                 <input
                                     type="text"
                                     name="email"
+                                    ref={emailRef}
                                     placeholder="email"
                                     className="input input-bordered"
                                 />
@@ -123,7 +159,23 @@ const Login = () => {
                                 >
                                     Login with Google
                                 </button>
+                                <button
+                                    className="btn  bg-violet-500 mt-4 hover:bg-violet-700 border-none text-white"
+                                    onClick={handleGithubSignIn}
+                                >
+                                    Login with GitHub
+                                </button>
                             </div>
+                            <p className="text-md text-center">
+                               
+                                Forget Password? Please{" "}
+                                <Link
+                                    onClick={handleResetPassword}
+                                    className="text-orange-600 font-semibold"
+                                >
+                                    Reset Password
+                                </Link>
+                            </p>
                             <p className="text-md text-center">
                                
                                 New here? Please{" "}

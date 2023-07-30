@@ -1,8 +1,10 @@
 import { Rating } from "@smastrom/react-rating";
 import { useLoaderData } from "react-router-dom";
 import '@smastrom/react-rating/style.css'
+import setTitle from "../../hook/setTitle"
 
 const CollegeDetails = () => {
+    setTitle("College-Details")
     const college = useLoaderData();
     const {
         picture,
@@ -15,8 +17,6 @@ const CollegeDetails = () => {
         events,
         sports,
     } = college;
-    console.log(events);
-    console.log(sports);
     return (
         <div>
             <div className="card bg-base-100 shadow-xl my-10 p-2 dark:bg-slate-400">

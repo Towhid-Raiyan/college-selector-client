@@ -1,13 +1,17 @@
-
+import setTitle from "../../hook/setTitle"
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { Form } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Admission = () => {
+    setTitle("Admission");
     const { register, handleSubmit, reset } = useForm();
+    const {user} = useContext(AuthContext);
 
     const onSubmit = (data) => {
-        fetch("http://localhost:5000/student", {
+        fetch("https://server-college-selector-towhid-raiyan.vercel.app/student", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -71,6 +75,7 @@ const Admission = () => {
                                 name="name"
                                 placeholder="Candidate name"
                                 className="input input-bordered"
+                                defaultValue={user?.displayName}
                                 {...register("name", {
                                     required: true,
                                 })}
@@ -85,6 +90,7 @@ const Admission = () => {
                                 name="email"
                                 placeholder="Email"
                                 className="input input-bordered"
+                                defaultValue={user?.email}
                                 {...register("email", {
                                     required: true,
                                 })}

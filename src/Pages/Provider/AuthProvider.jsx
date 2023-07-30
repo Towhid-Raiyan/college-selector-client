@@ -8,6 +8,7 @@ import {
     signOut,
     updateProfile,
     signInWithPopup,
+    GithubAuthProvider,
 } from "firebase/auth";
 import app from "../../firebase/firebase.config";
 import axios from "axios";
@@ -17,6 +18,7 @@ export const AuthContext = createContext(null);
 const auth = getAuth(app);
 
 const google_provider = new GoogleAuthProvider();
+const github_provider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -31,6 +33,10 @@ const AuthProvider = ({ children }) => {
     const googleSignIn = () => {
         setLoading(true);
         return signInWithPopup(auth, google_provider);
+    };
+    const githubSignIn = () => {
+        setLoading(true);
+        return signInWithPopup(auth, github_provider);
     };
     const loginWithEmail = (email, password) => {
         setLoading(true);
@@ -55,7 +61,7 @@ const AuthProvider = ({ children }) => {
 
             if (loggedUser) {
                 // write link in post
-                axios.post("http://localhost:5000/jwt", {
+                axios.post("https://server-college-selector-towhid-raiyan.vercel.app/jwt", {
                     email: loggedUser.email,
                 }).then(data => {
                     localStorage.setItem('access-token',data.data.token);
@@ -77,6 +83,7 @@ const AuthProvider = ({ children }) => {
         createUser,
         updateInfo,
         googleSignIn,
+        githubSignIn,
         loginWithEmail,
         logOut,
         loading,

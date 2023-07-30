@@ -3,7 +3,7 @@ import { Form, Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import Lottie from "react-lottie";
 import animationData from "../../assets/lottie/register.json";
-// import setTitle from "../../hook/setTitle";
+import setTitle from "../../hook/setTitle";
 import { isValidEmail, isValidPassword } from "../Validation/Validation"; 
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -11,7 +11,7 @@ import { FadeLoader } from "react-spinners";
 
 const Register = () => {
 
-    // setTitle("Register");
+    setTitle("Register");
 
     const { createUser, updateInfo, setUser, logOut } = useContext(AuthContext);
     const [status, setStatus] = useState("");
@@ -74,7 +74,7 @@ const Register = () => {
                             role: role,
                         };
                         console.log(saveUser);
-                        fetch("http://localhost:5000/users", {
+                        fetch("https://server-college-selector-towhid-raiyan.vercel.app/users", {
                             method: "POST",
                             headers: {
                                 "content-type": "application/json",

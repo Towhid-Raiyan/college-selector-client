@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
+import { useRef } from "react";
 import { useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
@@ -7,23 +8,69 @@ import Typewriter from "typewriter-effect";
 
 const PopularColleges = () => {
     const [popularCollege, setPopularCollege] = useState([]);
+    const [loading, setLoading] = useState(true);
+    // const [toys, setToys] = useState([]);
+    const [searchItem, setSearchItem] = useState(null);
+    const searchInputRef = useRef(null);
+
+    // useEffect(() => {
+    //     axios
+    //         .get(
+    //             "https://server-college-selector-towhid-raiyan.vercel.app/popularCollege"
+    //         )
+    //         .then((response) => {
+    //             setPopularCollege(response.data);
+    //             // console.log(response.data);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error fetching popular College:", error);
+    //         });
+    // }, []);
 
     useEffect(() => {
-        axios
-            .get(
-                "http://localhost:5000/popularCollege"
-            )
-            .then((response) => {
-                setPopularCollege(response.data);
-                // console.log(response.data);
-            })
-            .catch((error) => {
-                console.error("Error fetching popular College:", error);
-            });
-    }, []);
+        setLoading(true);
+        if (searchItem) {
+            console.log(searchItem);
+            fetch(`https://server-college-selector-towhid-raiyan.vercel.app/allCollege?college_name=${searchItem}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    setPopularCollege(data);
+                    setLoading(false);
+                });
+        } else if (!searchItem) {
+            fetch(`https://server-college-selector-towhid-raiyan.vercel.app/popularCollege`)
+                .then((res) => res.json())
+                .then((data) => {
+                    setPopularCollege(data);
+                    setLoading(false);
+                });
+        }
+    }, [searchItem]);
 
+    const setSearch = (event) => {
+        event.preventDefault();
+        const category = searchInputRef.current.value;
+        console.log(category);
+        setSearchItem(category);
+    };
+    // input input-bordered input-warning me-4
     return (
         <div className="container mx-auto">
+            <div className="flex justify-end  mb-8 mt-8">
+                <div className="max-h-8">
+                    <input
+                        className="input input-bordered border-2 border-orange-400 me-4"
+                        type="text"
+                        name="search"
+                        placeholder="Search College"
+                        ref={searchInputRef}
+                    />
+                    <button className="btn btn-outline px-10 bg-slate-100 border-0 border-b-4 border-orange-400 mt-4" onClick={setSearch}>
+                        Search
+                    </button>
+                </div>
+            </div>
             <p className="mt-12 mb-10 text-6xl font-bold text-orange-400 text-center">
                 <Typewriter
                     options={{
